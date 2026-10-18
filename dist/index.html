@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="星河智联，面向科技互联网企业的智能产品、云原生架构与数据增长解决方案。" />
+    <title>星河智联｜让技术成为增长的第二引擎</title>
+    <style>
+      :root {
+        --ink: #e9efff;
+        --muted: #91a0c5;
+        --blue: #79a8ff;
+        --cyan: #61e5e7;
+        --violet: #8e7dff;
+        --line: rgba(165, 185, 255, .16);
+        --panel: rgba(17, 25, 53, .72);
+        --bg: #070b18;
+        --max: 1180px;
+      }
+
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: Inter, "PingFang SC", "Microsoft YaHei", sans-serif;
+        line-height: 1.7;
+        overflow-x: hidden;
+      }
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: -2;
+        pointer-events: none;
+        background:
+          radial-gradient(circle at 77% 6%, rgba(98, 110, 255, .18), transparent 30rem),
+          radial-gradient(circle at 10% 48%, rgba(17, 154, 194, .1), transparent 32rem),
+          linear-gradient(180deg, #080d20 0%, #070b18 45%, #090d1b 100%);
+      }
+      body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        opacity: .14;
+        pointer-events: none;
+        background-image: linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px);
+        background-size: 72px 72px;
+        mask-image: linear-gradient(to bottom, black, transparent 68%);
+      }
+      a { color: inherit; text-decoration: none; }
+      .container { width: min(var(--max), calc(100% - 48px)); margin: 0 auto; }
+
+      .site-header {
+        position: fixed;
+        top: 0; left: 0; right: 0;
+        z-index: 20;
+        background: rgba(7, 11, 24, .62);
+        backdrop-filter: blur(18px);
+        border-bottom: 1px solid transparent;
+        transition: border-color .25s, background .25s;
+      }
+      .site-header.scrolled { background: rgba(7, 11, 24, .9); border-color: var(--line); }
+      .header-inner { height: 76px; display: flex; align-items: center; justify-content: space-between; }
+      .brand { display: inline-flex; gap: 11px; align-items: center; font-weight: 700; letter-spacing: .08em; }
+      .brand-mark { position: relative; width: 30px; height: 30px; display: grid; place-items: center; }
+      .brand-mark::before, .brand-mark::after { content: ""; position: absolute; border-radius: 50%; transform: rotate(45deg); }
+      .brand-mark::before { width: 19px; height: 19px; border: 2px solid var(--cyan); box-shadow: 0 0 20px rgba(97,229,231,.42); }
+      .brand-mark::after { width: 8px; height: 8px; background: var(--violet); box-shadow: 0 0 18px var(--violet); }
+      .brand small { display: block; font-size: 9px; color: var(--muted); letter-spacing: .24em; font-weight: 500; margin-top: -4px; }
+      .nav { display: flex; align-items: center; gap: 31px; color: var(--muted); font-size: 14px; }
+      .nav a { transition: color .2s; }
+      .nav a:hover, .nav a.active { color: var(--ink); }
+      .nav-cta, .button-primary { display: inline-flex; align-items: center; justify-content: center; gap: 9px; padding: 10px 17px; border: 1px solid rgba(121,168,255,.4); border-radius: 999px; color: white !important; background: linear-gradient(110deg, rgba(78,111,255,.84), rgba(126,97,255,.88)); box-shadow: 0 8px 30px rgba(73,74,229,.22); }
+      .menu-toggle { display: none; background: none; color: var(--ink); border: 0; font-size: 24px; }
+
+      .hero { min-height: 840px; padding: 175px 0 112px; position: relative; display: grid; align-items: center; }
+      .hero-grid { display: grid; grid-template-columns: 1.04fr .96fr; align-items: center; gap: 52px; }
+      .eyebrow { color: var(--cyan); font-size: 11px; letter-spacing: .24em; text-transform: uppercase; font-weight: 700; }
+      h1 { font-size: clamp(48px, 7vw, 86px); line-height: 1.06; letter-spacing: -.065em; margin: 20px 0 25px; max-width: 730px; }
+      h1 em { font-style: normal; color: transparent; background: linear-gradient(105deg, #d9e6ff 9%, #7fa7ff 48%, #8d7bff 92%); background-clip: text; -webkit-background-clip: text; }
+      .hero-copy { max-width: 570px; color: var(--muted); font-size: 17px; }
+      .hero-actions { display: flex; align-items: center; gap: 16px; margin-top: 34px; }
+      .button-secondary { color: #c9d6f4; border-bottom: 1px solid rgba(201,214,244,.46); padding: 9px 0; font-size: 14px; }
+      .button-secondary span { color: var(--cyan); margin-left: 7px; transition: transform .2s; display: inline-block; }
+      .button-secondary:hover span { transform: translateX(4px); }
+      .hero-note { display: flex; align-items: center; gap: 10px; margin-top: 48px; color: #68799f; font-size: 12px; }
+      .pulse { width: 7px; height: 7px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 0 5px rgba(97,229,231,.1), 0 0 22px var(--cyan); }
+
+      .orbital { min-height: 535px; position: relative; display: grid; place-items: center; }
+      .orbital::before { content: ""; position: absolute; width: 360px; height: 360px; border-radius: 50%; background: radial-gradient(circle, rgba(77,107,255,.25), rgba(77,107,255,.02) 57%, transparent 70%); filter: blur(12px); }
+      .orbit { position: absolute; width: 440px; height: 440px; border: 1px solid rgba(124,153,255,.2); border-radius: 50%; transform: rotate(-22deg); }
+      .orbit::before, .orbit::after { content: ""; position: absolute; border-radius: 50%; border: 1px solid rgba(124,153,255,.12); }
+      .orbit::before { inset: 47px -20px; transform: rotate(54deg); }
+      .orbit::after { inset: -13px 74px; transform: rotate(37deg); }
+      .core { width: 176px; height: 176px; border-radius: 46% 54% 51% 49%; display: grid; place-items: center; text-align: center; z-index: 2; background: linear-gradient(145deg, rgba(31,48,102,.9), rgba(12,18,45,.95)); border: 1px solid rgba(160,183,255,.45); box-shadow: inset 0 0 45px rgba(114,118,255,.17), 0 0 85px rgba(78,117,255,.28); transform: rotate(-7deg); }
+      .core strong { display: block; font-size: 27px; letter-spacing: -.04em; transform: rotate(7deg); }
+      .core small { display: block; margin-top: 3px; color: var(--cyan); letter-spacing: .15em; font-size: 10px; transform: rotate(7deg); }
+      .float-card { position: absolute; z-index: 3; display: flex; gap: 11px; align-items: center; padding: 12px 15px; border: 1px solid var(--line); border-radius: 13px; background: rgba(12,19,43,.84); backdrop-filter: blur(11px); box-shadow: 0 18px 50px rgba(0,0,0,.25); font-size: 12px; color: #cbd7f3; }
+      .float-card b { display: block; font-size: 13px; color: white; }
+      .float-card i { width: 28px; height: 28px; display: grid; place-items: center; border-radius: 9px; font-style: normal; background: rgba(97,229,231,.1); color: var(--cyan); }
+      .card-a { top: 86px; right: 20px; }
+      .card-b { bottom: 100px; left: 0; }
+      .card-c { bottom: 36px; right: 58px; }
+
+      .signal { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); color: #8493b7; overflow: hidden; }
+      .signal-inner { min-height: 68px; display: flex; align-items: center; gap: 36px; white-space: nowrap; font-size: 13px; }
+      .signal strong { color: var(--ink); font-weight: 500; }
+      .signal-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--violet); box-shadow: 0 0 12px var(--violet); }
+
+      section { padding: 132px 0; }
+      .section-top { display: flex; justify-content: space-between; gap: 50px; align-items: end; margin-bottom: 52px; }
+      .section-kicker { color: var(--violet); font-size: 12px; font-weight: 700; letter-spacing: .16em; margin-bottom: 14px; }
+      h2 { font-size: clamp(32px, 4vw, 54px); line-height: 1.13; letter-spacing: -.055em; margin: 0; max-width: 650px; }
+      .section-intro { color: var(--muted); max-width: 405px; margin: 0; }
+      .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 17px; }
+      .service { min-height: 315px; padding: 27px; position: relative; border: 1px solid var(--line); border-radius: 20px; background: linear-gradient(145deg, rgba(20,29,59,.72), rgba(10,15,34,.86)); overflow: hidden; transition: transform .25s, border-color .25s; }
+      .service:hover { transform: translateY(-7px); border-color: rgba(128,161,255,.52); }
+      .service::after { content: ""; position: absolute; width: 140px; height: 140px; right: -55px; bottom: -65px; border-radius: 50%; background: rgba(104,105,255,.13); filter: blur(10px); }
+      .service-no { color: #63749c; font-size: 12px; letter-spacing: .15em; }
+      .service-icon { width: 42px; height: 42px; display: grid; place-items: center; margin: 34px 0 21px; border: 1px solid rgba(97,229,231,.31); border-radius: 12px; color: var(--cyan); background: rgba(97,229,231,.07); font-size: 19px; }
+      .service h3 { margin: 0 0 11px; font-size: 22px; letter-spacing: -.03em; }
+      .service p { margin: 0; color: var(--muted); font-size: 14px; }
+      .service-link { position: absolute; bottom: 25px; color: #aabaf0; font-size: 12px; }
+
+      .method { background: linear-gradient(180deg, transparent, rgba(23,33,74,.23), transparent); }
+      .method-layout { display: grid; grid-template-columns: .8fr 1.2fr; gap: 90px; align-items: center; }
+      .method-copy p { color: var(--muted); max-width: 390px; margin: 21px 0 0; }
+      .steps { border-top: 1px solid var(--line); }
+      .step { display: grid; grid-template-columns: 80px 1fr 25px; align-items: center; gap: 15px; min-height: 98px; border-bottom: 1px solid var(--line); }
+      .step-no { color: var(--cyan); font-family: monospace; font-size: 13px; }
+      .step h3 { margin: 0 0 4px; font-size: 19px; }
+      .step p { margin: 0; color: var(--muted); font-size: 13px; }
+      .step-arrow { color: #55698f; font-size: 20px; }
+
+      .solutions { padding-top: 80px; }
+      .solutions-grid { display: grid; grid-template-columns: 1.25fr .75fr; gap: 17px; }
+      .solution { position: relative; min-height: 390px; padding: 30px; border-radius: 21px; border: 1px solid var(--line); overflow: hidden; background: #101936; }
+      .solution.large { background: radial-gradient(circle at 75% 25%, rgba(111,98,255,.38), transparent 29%), linear-gradient(125deg, #17214a, #0d142d); }
+      .solution.small { min-height: 186px; background: linear-gradient(135deg, #101d3d, #101429); }
+      .solution + .solution { margin-top: 17px; }
+      .solution-label { color: var(--cyan); font-size: 11px; letter-spacing: .16em; }
+      .solution h3 { max-width: 400px; margin: 16px 0 10px; font-size: 29px; letter-spacing: -.045em; }
+      .solution p { color: #a1b0d0; max-width: 430px; margin: 0; font-size: 14px; }
+      .solution-small-title { margin: 13px 0 5px; font-size: 20px; }
+      .solution.small p { font-size: 13px; }
+      .grid-art { position: absolute; right: 30px; bottom: 26px; width: 230px; height: 150px; opacity: .78; background: repeating-linear-gradient(0deg, transparent 0 29px, rgba(143,167,255,.15) 30px), repeating-linear-gradient(90deg, transparent 0 45px, rgba(143,167,255,.15) 46px); mask-image: linear-gradient(125deg, transparent 0%, black 55%); }
+      .grid-art::after { content: ""; position: absolute; width: 90px; height: 90px; right: 52px; bottom: 24px; border: 1px solid var(--cyan); transform: rotate(45deg); box-shadow: 0 0 24px rgba(97,229,231,.35), inset 0 0 24px rgba(97,229,231,.16); }
+      .solution-orb { position: absolute; right: 26px; bottom: 22px; width: 100px; height: 100px; border: 1px solid rgba(141,123,255,.7); border-radius: 50%; box-shadow: 0 0 35px rgba(141,123,255,.26); }
+      .solution-orb::after { content: ""; position: absolute; inset: 18px; border: 1px solid rgba(97,229,231,.72); border-radius: 50%; }
+
+      .contact { padding-bottom: 110px; }
+      .contact-box { position: relative; overflow: hidden; padding: 72px clamp(26px, 7vw, 90px); border: 1px solid rgba(135,157,255,.28); border-radius: 24px; background: linear-gradient(115deg, rgba(26,36,80,.85), rgba(20,21,58,.84)); }
+      .contact-box::before { content: ""; position: absolute; width: 420px; height: 420px; right: -130px; top: -180px; border-radius: 50%; border: 1px solid rgba(106,141,255,.25); box-shadow: 0 0 0 40px rgba(106,141,255,.04), 0 0 0 80px rgba(106,141,255,.03); }
+      .contact-box > * { position: relative; z-index: 1; }
+      .contact-box h2 { max-width: 670px; }
+      .contact-box p { color: #a0afd1; max-width: 490px; margin: 18px 0 30px; }
+      .contact-meta { display: flex; flex-wrap: wrap; gap: 24px; color: #aebce0; font-size: 13px; }
+      .contact-meta a { color: var(--cyan); }
+      footer { border-top: 1px solid var(--line); color: #7182a9; padding: 32px 0 40px; font-size: 12px; }
+      .footer-inner { display: flex; justify-content: space-between; gap: 20px; }
+
+      .reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
+      .reveal.visible { opacity: 1; transform: translateY(0); }
+      @media (max-width: 850px) {
+        .container { width: min(var(--max), calc(100% - 34px)); }
+        .header-inner { height: 68px; }
+        .menu-toggle { display: block; }
+        .nav { display: none; position: absolute; top: 68px; left: 17px; right: 17px; padding: 14px; flex-direction: column; align-items: stretch; gap: 0; border: 1px solid var(--line); border-radius: 15px; background: rgba(10,15,34,.97); }
+        .nav.open { display: flex; }
+        .nav a { padding: 10px 12px; }
+        .nav-cta { text-align: center; margin-top: 7px; }
+        .hero { min-height: auto; padding: 138px 0 70px; }
+        .hero-grid, .method-layout, .solutions-grid { grid-template-columns: 1fr; }
+        .hero-grid { gap: 30px; }
+        .orbital { min-height: 410px; transform: scale(.79); transform-origin: top center; margin-bottom: -80px; }
+        .section-top { display: block; }
+        .section-intro { margin-top: 20px; }
+        .services-grid { grid-template-columns: 1fr; }
+        .service { min-height: 275px; }
+        section { padding: 85px 0; }
+        .method-layout { gap: 44px; }
+        .solution.large { min-height: 370px; }
+        .footer-inner { display: block; }
+        .footer-inner span { display: block; margin-top: 8px; }
+      }
+      @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; } }
+    </style>
+  </head>
+  <body>
+    <header class="site-header" id="top">
+      <div class="container header-inner">
+        <a class="brand" href="#top" aria-label="星河智联首页">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span>星河智联<small>XINGHE INTELLIGENCE</small></span>
+        </a>
+        <button class="menu-toggle" aria-label="打开菜单" aria-expanded="false">☰</button>
+        <nav class="nav" aria-label="主导航">
+          <a href="#capabilities">能力</a>
+          <a href="#method">方法</a>
+          <a href="#solutions">方案</a>
+          <a href="#contact" class="nav-cta">开始交流 <span>↗</span></a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="container hero-grid">
+          <div class="reveal">
+            <div class="eyebrow">TECHNOLOGY × BUSINESS</div>
+            <h1 id="hero-title">让技术成为<br /><em>增长的第二引擎</em></h1>
+            <p class="hero-copy">我们把前沿技术转化为可落地的产品、平台与体验，帮助企业在变化更快的时代，持续建立自己的数字优势。</p>
+            <div class="hero-actions">
+              <a class="button-primary" href="#capabilities">搜索能力 <span>↗</span></a>
+              <a class="button-secondary" href="#contact">预约技术交流 <span>→</span></a>
+            </div>
+            <div class="hero-note"><span class="pulse"></span>正在连接产品、数据与智能的下一种可能</div>
+          </div>
+          <div class="orbital reveal" aria-label="产品、云与数据连接的动态示意图">
+            <div class="orbit"></div>
+            <div class="core"><div><strong>星河<br />智联</strong><small>BUILD THE NEXT</small></div></div>
+            <div class="float-card card-a"><i>✦</i><span><b>AI Native</b>智能原生体验</span></div>
+            <div class="float-card card-b"><i>⌁</i><span><b>Cloud Ready</b>云原生底座</span></div>
+            <div class="float-card card-c"><i>◌</i><span><b>Data Loop</b>数据驱动增长</span></div>
+          </div>
+        </div>
+      </section>
+
+      <div class="signal" aria-label="服务领域">
+        <div class="container signal-inner"><strong>我们专注于</strong><span class="signal-dot"></span><span>数字产品</span><span class="signal-dot"></span><span>云原生架构</span><span class="signal-dot"></span><span>人工智能</span><span class="signal-dot"></span><span>数据增长</span><span class="signal-dot"></span><span>品牌体验</span></div>
+      </div>
+
+      <section id="capabilities">
+        <div class="container">
+          <div class="section-top reveal">
+            <div><div class="section-kicker">01 / CAPABILITIES</div><h2>把复杂技术，<br />变成简单答案。</h2></div>
+            <p class="section-intro">从一个值得验证的想法，到一套稳定运行的业务系统，我们用跨学科团队把每个关键环节连接起来。</p>
+          </div>
+          <div class="services-grid">
+            <article class="service reveal"><div class="service-no">01 — PRODUCT</div><div class="service-icon">✦</div><h3>智能产品</h3><p>围绕真实用户场景，设计有温度、可迭代、能产生业务价值的数字产品与交互体验。</p><div class="service-link">产品策略 · 体验设计 · 工程实现</div></article>
+            <article class="service reveal"><div class="service-no">02 — INFRA</div><div class="service-icon">⌁</div><h3>云原生架构</h3><p>以稳定、安全、弹性为底座，构建能够适应业务变化的现代化技术基础设施。</p><div class="service-link">架构咨询 · 平台工程 · 智能运维</div></article>
+            <article class="service reveal"><div class="service-no">03 — INTELLIGENCE</div><div class="service-icon">◌</div><h3>数据与智能</h3><p>让分散的数据形成可行动的洞察，把人工智能融入业务流程与每一次决策。</p><div class="service-link">数据资产 · AI 应用 · 增长闭环</div></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="method" id="method">
+        <div class="container method-layout">
+          <div class="method-copy reveal"><div class="section-kicker">02 / OUR METHOD</div><h2>从洞察出发，<br />与变化一起成长。</h2><p>我们不把技术当作终点。每一次交付，都应该让产品更接近用户，让组织更接近目标。</p></div>
+          <div class="steps reveal">
+            <div class="step"><div class="step-no">01 / SEE</div><div><h3>看见真实问题</h3><p>理解用户、业务和环境，找到最值得解决的那个问题。</p></div><div class="step-arrow">↗</div></div>
+            <div class="step"><div class="step-no">02 / SHAPE</div><div><h3>构建可行解法</h3><p>用产品思维和工程能力，把想法变成可验证的体验。</p></div><div class="step-arrow">↗</div></div>
+            <div class="step"><div class="step-no">03 / SCALE</div><div><h3>持续放大价值</h3><p>用数据反馈驱动迭代，让每一轮投入都产生下一轮增长。</p></div><div class="step-arrow">↗</div></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="solutions" id="solutions">
+        <div class="container">
+          <div class="section-top reveal"><div><div class="section-kicker">03 / SOLUTIONS</div><h2>为每个关键时刻，<br />准备一套好方案。</h2></div><p class="section-intro">以下是我们擅长的解决方案方向，可根据企业阶段和业务目标灵活组合。</p></div>
+          <div class="solutions-grid">
+            <article class="solution large reveal"><div class="solution-label">SOLUTIONS / 01</div><h3>智能运营中台</h3><p>将业务流程、数据资产与 AI 能力汇聚在同一套可扩展的工作台上，让团队更快发现问题，也更快行动。</p><div class="grid-art" aria-hidden="true"></div></article>
+            <div>
+              <article class="solution small reveal"><div class="solution-label">SOLUTIONS / 02</div><h3 class="solution-small-title">数字化底座</h3><p>为复杂业务建立稳定、敏捷、可持续演进的技术基础。</p><div class="solution-orb" aria-hidden="true"></div></article>
+              <article class="solution small reveal"><div class="solution-label">SOLUTIONS / 03</div><h3 class="solution-small-title">AI 工作流实验室</h3><p>从一个流程切入，把智能能力变成团队每天都在使用的生产力。</p></article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="contact" id="contact">
+        <div class="container">
+          <div class="contact-box reveal"><div class="section-kicker">LET'S BUILD THE NEXT</div><h2>下一个被实现的好想法，会是你的。</h2><p>告诉我们你正在面对的挑战。我们会从问题出发，一起找到值得投入的下一步。</p><div class="contact-meta"><span>商务合作 <a href="mailto:hello@xinghe.tech">hello@xinghe.tech</a></span><span>技术交流 <a href="mailto:tech@xinghe.tech">tech@xinghe.tech</a></span></div></div>
+        </div>
+      </section>
+    </main>
+
+    <footer><div class="container footer-inner"><span>© <span id="year"></span> 星河智联 XINGHE INTELLIGENCE</span><span>以技术连接想象，以产品创造价值。</span></div></footer>
+
+    <script>
+      const header = document.querySelector('.site-header');
+      const menu = document.querySelector('.menu-toggle');
+      const nav = document.querySelector('.nav');
+      const year = document.querySelector('#year');
+      year.textContent = new Date().getFullYear();
+      menu.addEventListener('click', () => { const open = nav.classList.toggle('open'); menu.setAttribute('aria-expanded', String(open)); });
+      nav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => { nav.classList.remove('open'); menu.setAttribute('aria-expanded', 'false'); }));
+      window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 20), { passive: true });
+      const observer = new IntersectionObserver(entries => entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } }), { threshold: .12 });
+      document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+  </body>
+</html>
+
